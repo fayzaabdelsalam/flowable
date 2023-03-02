@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+	xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+	xmlns:flowable="http://flowable.org/bpmn"
+	targetNamespace="Examples">
+	<process id="signup-process" name="signup-process" isExecutable="true">
+		<startEvent id="start" flowable:initiator="initiator" />
+		<sequenceFlow sourceRef="start" targetRef="confirm-email-task" />
+		<serviceTask id="confirm-email-task" flowable:class="com.example.flowable1.services.LoadService"/>
+		<sequenceFlow sourceRef="confirm-email-task" targetRef="send-welcome-email-task" />
+		<serviceTask id="send-welcome-email-task" flowable:class="com.example.flowable1.services.EmailService" />
+		<sequenceFlow sourceRef="send-welcome-email-task" targetRef="end" />
+		<endEvent id="end" />
+	</process>
+</definitions>
